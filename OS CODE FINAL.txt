@@ -1,0 +1,1938 @@
+
+				------------PRACTICAL NO 1----------------
+
+1)Create a file named ‘Numbers’ containing numbers 1-20. Print data of this file in 5 columns.
+Command = cat > Numbers  (enter 1-20)
+Command = $pr -t -5 
+
+2)Create a file ‘employee’ and enter the sample data given above.
+Command = $ cat>employee
+
+3)Display employee file in printable format.
+Command = $pr employee
+
+4)Display employee file with space and line numbers.
+Command = $pr -t -n -d -o 4 employee
+
+5)Display first 10 records of employee file.
+Command = $ head employee
+
+6)Display first 3 records of employee file.
+Command = $ head -n 3 employee
+
+7)Display last 10 records of employee file.
+Command = $ tail employee
+
+8)Display last 3 records of employee file.
+Command = $ tail -n 3 employee
+
+9)Cut first 5 records of employee file and copy it in file named ‘shortlist’
+Command = $head -n 5 employee | tee shortlist
+
+10)Extract two columns of shortlist file.
+Command = $cut -c 6-22,24-30 shortlist
+
+11)Extract second and third column(fields) by specifying delimiter.
+Command = $ cut -d \| -f 2,3 shortlist | tee cutlist1
+Command = $ cut -d “|” -f 1,4 shortlist > cutlist2
+
+12)Extract the fields numbered 1,4,5 and 6 and save the output in cutlist2. 
+Command = cut -d “|” -f 1,4- shortlist > cutlist2
+
+13)Paste above two files side by side.
+Command = $paste cutlist1 cutlist2
+
+14)Put delimiter in above command.
+Command = $paste -d”|” cutlist1 cutlist2
+
+15)Sort file ‘shortlist’
+Command = $sort shortlist
+
+16)Sort ‘shortlist’ file on second field.
+Command = $sort -t”|” -k 2 shortlist
+
+17)Sort ‘shortlist’ file in reverse order.
+Command = $sort -t”|” -r -k 2 shortlist
+
+18)Show sorting on secondary key.
+Command = $sort -t”|” -k 3,3 -k 2,2 shortlist
+
+19)Create a ‘dept’ file with following records. Display only unique records.
+ 
+Command = cat > dept
+Command = $cat dept
+Command = $ uniq dept
+
+20)Display only non-repeated lines from ‘dept’.
+Command = $ uniq -u dept
+
+21)Display only one copy of repeated records.
+Command = $ uniq -d dept
+
+22)Count the frequency of occurrence of repeated records.
+Command = $ uniq -c dept
+
+23)Replace “|” symbol with ‘~’ sign and ‘/’ with ‘-‘symbol in file employee.
+Command = $ tr “|/” “~-“ < employee | head -n 3
+
+24)Convert small letter alphabet to uppercase in ‘dept’ file.
+Command = $ head -n 3 dept | tr ‘[a-z]’ ‘[A-Z]’
+
+				------------PRACTICAL NO 2----------------
+
+1)Display lines containing sales in ‘employee’.
+Command = $ grep “sales” employee
+
+2)Display lines containing ‘accounts’ from ‘employee’ and ‘dept’.
+Command = $ grep “accounts” employee dept
+
+3)Display lines containing ‘agrawal’ in employee.
+Command = $ grep -i ‘agrawal’ employee
+
+4)Display all lines except ‘accounts’ from ‘dept’.
+Command = $ grep -v ‘accounts’ dept
+
+5)Display line numbers containing ‘marketing’ from employee.
+Command = $ grep -n ‘marketing’ employee
+
+6)How many directors are there in the file ‘employee’?
+Command = $ grep -c ‘director’ employee
+
+7)Display only file names containing ‘manager’.
+Command = $ grep -l ‘manager’ *
+
+8)Display all the different ‘aggrawal’ from employee.
+Command = $ grep -e “Agarwal” -e “Aggarwal” -e “Agrawal” employee
+Command = $ egrep ‘Ag(arwal|garwal|rawal)’ employee
+
+9)Accept pattern from a file for matching and display output.
+Command = $ grep -f pattern employee
+Example = $ cat > file1
+Hello World. This file has random Text.
+$ cat > file2
+World
+Text
+Purpose
+Command = $ fgrep file2 file1 
+
+10)Display ‘agrawal’ with the help of regular expression.
+
+Command = $ grep “[aA]g[ar][ar]wal” employee
+Command = $ grep “[aA]gg*[ar][ar]wal” employee
+
+11)Display name ‘J ____ Saxena’ from employee.
+Command = $ grep “j.*Saxena” employee
+
+12)Display employee records whose number starts from 2.
+Command = $ grep “^2” employee
+
+13)Display employee records whose salary is between 7000 – 7999.
+Command = $ grep “7…$” employee
+
+14)Display employee records whose number doesn’t start from 2.
+Command = $ grep “^[^2]” employee
+
+15)Display the records of Sengupta and Dasgupta.
+Command = $ grep -E ‘sengupta|dasgupta’ employee
+
+				-------------PRACTICAL NO 3 ---------------
+
+Q.  Create a file with the name “vi_test” with some meaningful contents using vi editor. Use this file to test various commands.
+cat>vi_test
+Twinkle Twinkle
+Little Star
+How I Wonder waht you are ?
+Up Above the worldsoHigh !!
+Like a diamond in the Sky........
+Jack and Jill
+went up the hill
+to fetch a pale of water
+Jack fell down
+and broke his crown
+Jill came tumbling after
+
+1) Shift from command mode to insert mode.
+-> vi vi_test
+2) Enlist the basic cursor movement commands.
+-> h, i, j, k, backspace, spacebar, ^, $
+3) Move the cursor to the beginning of next line.
+-> +
+4) Move the cursor to the beginning of previous line.
+->-
+5) Observe what happens when you type 5b in current line.
+-> 5b
+6) Observe what happens when you type 3w in current line.
+-> 3w
+7) Move the cursor to the first character of next word in current line.
+-> w
+8) Move the cursor to the first character of previous word in current line.
+-> b
+9)Move the cursor at the end of the current word in current line.
+-> e
+10) set the line numbering against each line.
+-> :set nu  or :set number
+11) what will happen if you type G and 5G? Observe the output.
+12) Enlist delete characters/lines commands.
+-> x,X,dw,
+13) Save your current work remain in editing mode.
+-> ESC :w
+14) Delete a line that is three lines down the current line.
+-> ESC :+3d
+15) Delete a line that is four lines above the current line.
+-> ESC :-4d OR ESC :.-4d
+16) Delete all three lines below current line including current line.
+-> ESC : . , +3d
+17) Abort the changes.
+-> ESC :w!
+18) Save your work and quit from editor.
+-> ESC :wq
+19) What will happen when you type the command vi +5 vi_test? Observe the output.
+20) Delete 7th line.
+-> ESC :7d
+21) Delete lines from 3rd to 5th .
+-> ESC :3,5d
+22) Move line 5th after line 7.
+-> ESC :5 mo 7
+23) Move line 2nd to 5th after line 9.
+-> ESC :2,5 mo 7
+24) Copy line 4th after line 6.
+-> ESC :4 co 6 
+25) Copy lines 6th to 10th after line 8.
+-> ESC :6,10 co 8
+26) Save current file with the new file name “test_vi”.
+-> ESC :w test_vi
+27)Write line 2 in new file “example”
+-> ESC :2 w example
+28) Write current line in new file “eg1”.
+-> ESC : .w eg1
+29) Write last line in new file “eg2”.
+-> ESC : $w eg2
+30) Write lines from current line to last line to a file “eg3”.
+-> ESC :.,$w eg3
+31) Write lines 7 to 10 in new file “eg4”.
+-> ESC :7,10 w eg4
+32) Append lines 3 to 5 in file “example”.
+->ESC :3,5 w>>example
+33) Read the content of the file “example” at current cursor position in file “test_vi”.
+-> ESC :r example
+34) Replace first occurrence of “the” with “THE” in current line.
+-> ESC :.s/the/THE
+35) Replace all occurrence of “this” with “THIS” in current line.
+-> ESC :.s/this/THIS/g
+36) Replace all occurrence of “that” with “THAT” from lines 5 to 8.
+-> ESC :5,8 s/that/THAT
+37) Replace all occurrence of “the” with “THE” from 1st line to end of file.
+-> ESC :1, $ s/the/THE/g
+38) Replace all occurrence of “how” with “HOW” from 1st line to current line of file.
+-> ESC :1, . s/how/HOW/g
+39)Replace all occurrence of “that” with “THAT” from current line to end of file.
+-> ESC :.$ s/that/THAT/g
+40) Save your work and quit from vi editor.
+-> ESC :wq
+41) Load three files “demo”, “test” and “example” in vi buffer for editing.
+-> vi demo test example.
+42) Edit next file in the buffer.
+-> ESC :n
+43) Display the names of all files in the buffer.
+-> ESC :args
+44) Make some editing in this file.
+-> I or i
+45) Edit next file in the buffer without saving the current file.
+-> ESC :n!
+46) Edit first file in the buffer.
+-> ESC :rew
+47) Display the name of the current file.
+-> ESC :f
+48) Stop editing current file and edit file “videmo”.
+-> ESC :e videmo
+49) Edit first file in the buffer without saving current file.
+-> ESC :rew!
+50) Restore last saved edition of current line.
+-> ESC :e!
+51) Return to editing to most recently edited file.
+-> ESC :e#
+52) Save your work and quit vi editor.
+-> ESC :wq
+53) Load the file ‘vi_test’.
+-> vi vi_test
+54) Search for the pattern “the” in forward direction.
+-> /the
+55) Search for the pattern “the” in backword direction.
+-> ?the
+56) Search for all the lines which begin with word “how”.
+-> /^how/
+57) Search for all the lines which ends with word “how”.
+-> /how$/
+58) Search for all the strings which begin with the word “the”.
+-> /^the/
+59) Search for all the strings which ends with the word “the”.
+-> /the$/
+60) Search only for the whole word “what”.
+-> /\<what\>/
+61) Search for the strings which contains any character in the range ‘m’ to ‘s’ and is followed by ‘ing’.
+-> /[m-s]ing/
+62) Search for all the strings which contains the character ‘art’, with art being preceded by any other character other than ‘p’.
+-> /[^p]art/
+63) Search for all words which begin with characters ‘that’ and end with any characters.
+-> /that*/
+64) Save your work and quit vi editor.
+-> ESC :wq
+
+				-------------PRACTICAL NO 4----------------
+
+Create the file with the name “sed-test” with the following contents: -
+Carrots:veg:1.39:1:n
+Milk:Diary:1.89:2:n
+Magazine:Sundry:3.50:1:y
+Cheese:Diary:4.39:1:n
+Sandwich:Deli:3.89:2:y
+Onions:Veg:0.89:6:n
+Chicken:Meat:4.89:2:n
+Newspaper:Sundry:1.00:1:y
+Fish:Meat:3.79:3:n
+Floorwax:Hshld:4.65:1:y
+Melon:Fruit:1.98:3:n
+Celery:Veg:1.79:1:n
+
+1. Display only first three lines.
+
+Code: sed '3q' sed-test
+
+2. Display line numbers from four to seven.
+
+Code:  sed -n '4,7p' sed-test
+
+3. Display only last line.
+
+Code:  sed -n '$p' sed-test
+
+4. Display only line number 8.
+
+Code:  sed -n '8p' sed-test
+
+5. Display lines containing “Onions”.
+
+Code: sed -n '/Onions/p' sed-test
+
+6. Display all lines containing “Diary”.
+
+Code:  sed -n '/Diary/p' sed-test
+
+7. Delete second line.
+
+Code: sed '2d' sed-test
+
+8. Delete lines from seven to ten.
+
+Code: sed '7,10d' sed-test
+
+9. Delete lines containing “Meat”.
+
+Code:  sed -n '/Meat/d' sed-test
+
+10. Display lines start at 3 through the first line matching the string “Meat”.
+
+Code: sed -n '3,/Meat/p' sed-test
+
+
+11. Delete lines start at 4 through the first line matching the string “Fruit”.
+
+Code: sed -n '4,/Fruit/d' sed-test
+
+12. Display lines number at interval of 2 i.e. starting at 1, every other line is output.
+
+Code: cat -n sed-test|sed -n '1~2p'
+
+
+13. Display lines starting at 2 and outputs every third line from there.
+
+Code:  cat -n sed-test|sed -n '2~3p'
+
+
+14. Display lines starting with “S”.
+
+Code:  sed -n '/^S/p' sed-test
+
+
+15. Display lines ends with “n”.
+
+Code:  sed -n '/n$/p' sed-test
+
+
+16. Display lines that are not starting with “C”.
+
+Code:  sed -n '/^C/!p' sed-test
+
+
+17. Display lines that are not ending with “y”.
+
+Code:  sed -n '/[^y]$/p' sed-test
+
+
+18. Display all lines that are not starting with “v” or “V” in second field.
+
+Code:cut -d ":" -f2 sed-test|sed -n '/^[vV]/!p'
+
+
+19. Display all lines that are not ending with “y” in second field.
+
+Code:  cut -d ":" -f2 sed-test|sed -n '/y$/!p' sed-test
+
+20. Delete lines containing nothing.
+
+Code:sed -n '/^$/d' sed-test
+
+21. Delete all lines containing “2” in third field.
+
+Code:  cut -d f4 sed-test|sed '/2/d' sed-test
+
+22. Delete all lines containing “y” in fourth field.
+
+Code:cut -d f5 sed-test|sed '/y/d' sed-test
+
+
+23. Display all lines that do not start with C.
+
+Code:  sed -n '/^S/!p' sed-test
+
+
+24. Display all lines that are not empty.
+
+Code:  sed -n '/^$/!p' sed-test
+
+
+25. Delete any other line that does not contain the string “Fish”.
+
+Code: sed -n '/Fish/!d' sed-test
+
+26. Display lines between the strings “Milk” and “Newspaper”.
+
+Code:  sed -n '/Milk/,/Newspaper/p' sed-test
+
+
+27. Display lines between the string “Sundry” and line number 11.
+
+Code: sed -n '/Sundry/,11p' sed-test
+
+
+28. Replace only first occurrence of “Diary” with “DAIRY” in all lines.
+
+Code:  sed 's/Diary/DIARY/' sed-test
+
+
+29. Replace only first occurrence of “Diary” with “DAIRY” in all lines.
+
+Code: sed 's/3/4/' sed-test
+
+
+				-------------PRACTICAL NO 5-----------------
+
+A)Create a file empdata, which contains the following fields:-
+Fieldname Datatype Value
+1. Employee name character
+2. Employee code numeric starts with letter ‘E’
+3. Department code character MKT, HRD, PUR
+4. Grade character A-C
+5. Designation character manager, director, gm, executive
+6. Years of experience numeric
+7. Date of birth dd-mm-yy
+8. Region character Pune, Mumbai etc…
+9. Basic pay numeric
+Insert at least five records in above file; character fields in each record may not be same in the same
+case. ‘~’ is used as a field separator. Give commands for the following:-
+Jai~E1~MKT~A~manager~6~01-01-75~Pune~16000
+Raj~E2~HRD~B~director~5~01-01-75~Mumbai~15000
+Kamal~E3~PUR~C~gm~2~02-03-86~Pune~9000
+Anna~E4~MKT~D~manager~9~14-05-75~Mumbai~25000
+Ram~E5~HRD~A~executive~7~23-10-80~Mumbai~30000
+
+1. Display all employees who are manager in office.
+
+Code:  awk '/manager/' empdata
+
+2. List the details of an employee “Jai” in Mumbai office.
+
+Code: awk -F "~" '$1=="Raj" && $8=="Mumbai"'
+empdata
+
+
+3. Display all employees who are not in the department MKT. display the output sorted on
+department code.
+
+Code 
+ awk -F "~" '$3!="MKT" empdata|sort -t "~" -k3
+
+4. Display all employees whose years of experience are more than 5.
+
+Code: awk -F "~" '$6>"5"' empdata
+
+
+5. List only employee name, department code and basic pay of employees who are executive.
+
+Code:  awk -F "~" '$5=="executive" {print
+$1,$3,$9}' empdata
+
+6. Display all employees having grade ‘A’.
+
+Code: awk -F "~" '$4=="A" {print $1}' empdata
+
+
+7. Count total number of employees whose department code is HRD.
+
+Code:
+ awk -F "~" '$3=="HRD"
+> {cnt=cnt+1}
+> end{
+> printf "totalnumber of employees whose department code is 'HRD' is %d
+\n",cnt}' empdata
+
+
+8. Display employee’s names with salary above 10,000.
+
+Code: awk -F "~" '$9>"10000"{print $1}' empdata
+
+
+9. Display only designation and basic pay of employees having number of experience between three
+and 5.
+
+Code: awk -F "~" '"$6>3 && $6<5"{print $5,$9}'empdata
+
+10. Find the number of employees in Pune office.
+Code:
+awk -F "~" '$8=="Pune"
+> {cnt=cnt+1}
+> end{
+> printf "Number of employees in Pune office is %d/n",cnt}' empdata
+
+
+11. Display employees who get basic pay less than 15000, also calculate and display average basic
+pay.
+
+Code:
+ awk 'BEGIN {FS="~"
+> OFS=":"
+> printf "\nDetails\n"
+> } $9<15000{
+> cnt=cnt+1; add=add+$9
+> print NR,NF,$0
+> }END{
+> avg=add/cnt
+> printf "The average salary of employees is %d\n",avg}' empdata
+
+
+12. Locate the employees with same date of birth in Pune office.
+Code: awk -F "~" '$8=="Pune" && $7=="01-01-
+75"{print NR, $1}' empdata
+
+
+13. Locate all for Raj, Jai and Kamal as employee name.
+Code: awk -F "~"
+'$1=="Raj"||$1=="Jai"||$1=="Kamal"' empdata
+
+14. Locate all except for Raj, Jai and Kamal as employee name.
+Code: awk -F "~" '$1!~/Raj|Jai|Kamal/' empdata
+
+
+15. Find the employees who have designation as director and find the 40% of basic pay as da and
+15% of basic pay as hra.
+Code:
+ awk -F "~" '$5=="director"{
+>da=$9*0.04;hra=$9*0.15
+> print nr,nf,$1,$9,da,hra}' empdata
+
+
+16. Store employee name and date of birth in a file’ nbdata’.
+
+Code: awk -F "~" '{print $1,$7}'empdata|tee nbdata
+
+
+B) Create a file student with following fields:-
+Fieldname Datatype Value
+Student code numeric
+Student name character
+Batch code character B11-B15
+No. of modules numeric 1-5
+Average marks numeric
+Insert at least five records in above file; ‘:’ is used as a field separator. Give commands for the
+following:-
+
+[tybscit@localhost Desktop]$ cat>stud
+1:Anna:B11:5:90
+2:Ram:B12:7:88
+3:Hugh:B13:4:70
+4:Tom:B14:1:55
+5:Leo:B15:4:65
+
+1. Display the details of student in order of their names ignoring case.
+
+Code:awk '{print}' stud|sort -t ":" -k 2 -f
+
+
+2. Display the details of students whose number of modules is greater than 3.
+
+Code:  awk -F ":" '$4>3{print "%s\n",$0}' stud
+
+
+3. Store the list of rank holders in file ‘merit’ along with student code and student name, and marks
+& display its contents.
+
+Code:  sort -t ":" -k5 -r -n stud|head -3|awk -F
+":" '{print $1,$2,$5}'>merit
+
+4. Count the number of students in batch B13.
+
+Code: awk -F ":" '$3=="B13"{
+
+
+5. Display the names of students with same names.
+
+Code :  awk -F ":" '$2~/[aA][bB][cC]/' stud
+
+6. Display the students belonging to batch codes B12 or B15.
+
+Code: awk -F ":" '$3=="B12" || $3=="B15"{print
+$1}' stud
+
+7. Display all the names not starting with ‘a’ or ‘A’.
+
+Code: awk -F ":" '$2~/^[^aA]/' stud
+
+8. Display all the names starting with ‘a’ or ‘A’.
+
+Code:  awk -F ":" '$2~/^[aA]/' stud
+
+9. Display and count the number of students having marks in the range 40 to 60. Also display the
+total and average marks.
+
+Code:
+ awk 'BEGIN{FS=":"
+> OFS=":"
+>printf "Details\n"
+> }$5>=40 && $5<=60{
+>cnt=cnt+1
+>tot=tot+$5
+> print NR,$2
+> }END{
+>avg=tot/cnt
+>printf "Total marks:%d\n",tot
+>printf "Average marks :%d\n",avg
+>printf "Total students :%d\n",cnt}' stud
+
+
+10. Display the student’s records from line number 2 to 4.
+
+Code:  awk -F ":" 'NR==2,NR==4{printf "%d%s\n",NR,$0}' stud
+
+
+11. Display the student’s records that are having number of fields 5.
+
+Code:awk -F ":" 'NF==5{print $0}' stud
+
+
+12. Display the student’s records that are having number of fields less than or equal to 4.
+
+Code: awk -F ":" 'NF<=4{printf $0}' stud
+
+13. Display the student code, student name and marks that are having number of fields greater than 5.
+
+Code:  awk -F ":" 'NF<=5{print $1,$2,$5}' stud
+
+14. Display the student’s name having the length greater than 3.
+
+Code: awk -F ":" 'length($2)>3{print $1,$2,$5}'
+stud
+
+
+15. Display the student’s records having the length of student name less than or equal to 3.
+
+Code:  awk -F ":" 'length($2)<=3{print $1,$2,$5}'
+stud
+
+
+16. Display the student’s records having the length less than or equal to 15.
+
+Code:  awk -F ":" 'length($2)<=15{print $1,$2,$5}'
+stud
+
+
+17. Display the student’s records having the length greater than or equal to 15.
+
+Code :
+ awk -F ":" 'length($2)>=15{print $1,$2,$5}' stud
+
+18. Display the student’s records having the length is in the range 5 to 15.
+
+Code:  awk -F ":" 'length >=5 && length<=15{print
+$0}' stud
+
+
+19. Display the line number and index having character ‘b’ in student name.
+
+Code:  awk -F ":" '{print NR,index($2,"b")}' stud
+
+
+20. Display the line number, student name and index having character ‘b’ in student name.
+
+Code: awk -F ":" '{print NR,index($2,"b"),$2}'
+stud
+
+
+21. Display the index, student name and marks having character ‘b’ in student name.
+
+Code: awk -F ":" '{print index($2,"b"),$2,$5}'
+stud
+
+
+22. Display the line number, index, student name and marks having character ‘b’ in student name.
+
+Code:  awk -F ":" '{print NR,index($2,"b"),$2,$5}'
+stud
+
+
+				--------------PRACTICAL NO 6-----------------
+
+1] Write a shell program to execute the following:
+i] Display calendar of current year.
+ii] Display today's date.
+iii] Display list of all users currently logged in.
+iv] Display message "Hello World".
+v] Perform some calculation.
+
+Code: vi 1
+echo "Calendar of current month:"
+cal
+echo "Today's date:"
+date
+echo "Users currently logged in:"
+who
+echo "Hello World"
+echo "Calculation of:"
+bc
+
+
+2] Write a shell program to execute the following commands:
+i] Display present working directory
+ii] Display today's date and time in 2 different lines.
+iii] Display your terminal address.
+iv] Display login name of user currently logged in.
+v] Display all processes of the users.
+vi] Display all files and directories in current working directory.
+
+Code: vi 2
+echo "Present working directory is "
+pwd
+echo "Today's date is"
+date +%D
+echo "Today's time is "
+date +%r
+echo "Terminal address:"
+tty
+echo "Name of user currently logged in:"
+who am i
+echo "Process of the user"
+ps
+echo "Files and Directories in current working directory"
+ls –l
+
+
+3] Write a shell script to initialize values in 2 variables and perform addition, subtraction,
+multiplication, division, modulo and print the appropriate result.
+
+Code: vi 3
+var1=10
+var2=5
+echo "Sum:`expr $var1 + $var2`"
+echo "Difference:`expr $var1 - $var2`"
+echo "Product:`expr $var1 \* $var2`"
+echo "Division:`expr $var1 / $var2`"
+echo "Modulus:`expr $var1 % $var2`"
+
+
+4] Write a shell script to read values from the user and perform +, -,*,/ and %.
+(Read <variable name>)
+
+Code: vi 4
+read a
+read b
+echo "Sum: `expr $a + $b`"
+echo "Difference: `expr $a - $b`"
+echo "Product: `expr $a \* $b`"
+echo "Division: `expr $a / $b`"
+echo "Modulus: `expr $a % $b`"
+
+
+5] Write a shell script to read input from the user and check whether it is greater than 10 or not.
+
+Code: vi 5
+echo "Enter a number:"
+read a
+if [ $a -gt 10 ]
+then
+echo "$a is greater than 10"
+else
+echo "$a is less than 10"
+fi
+
+
+6] Write a shell script to accept a number from the user and check whether it is even or odd.
+
+Code: vi 6
+echo "Enter a number:"
+read a
+if [ `expr $a % 2` -eq 0 ]
+then
+echo "Even number."
+else
+echo "Odd number."
+fi
+
+7] Write a shell script to check whether the number is divisible by 3 or not.
+
+Code: vi 7
+echo "Enter a number :"
+read a
+if [ `expr $a % 3` -eq 0 ]
+then
+echo "Divisible by 3."
+else
+echo "Not divisible by 3."
+fi
+
+
+8] Write a shell script to read number from the user and check whether number is divisible by 3 or 7.
+
+Code: vi 8
+echo "Enter a number :"
+read a
+if [ `expr $a % 3` -eq 0 ]
+then
+echo "Divisible by 3."
+elif [ `expr $a % 7` -eq 0 ]
+then
+echo "Divisible by 7."
+else
+echo "Not divisible by 3 or 7."
+fi
+
+9] Write a shell script to read number from the user and check whether it is divisible by 3 and 7 or only by 3 or only by 7 or not by both.
+
+Code: vi 9
+echo "Enter a number :"
+read a
+if [ `expr $a % 3` -eq 0 ]
+then
+echo "Divisible by 3."
+else
+echo "Not divisible by 3."
+fi
+if [ `expr $a % 7` -eq 0 ]
+then
+echo "Divisible by 7."
+else
+echo "Not Divisible by 7."
+fi
+
+
+10] Write a shell script to read 3 numbers from the user and find the largest using nested if else.
+
+Code: vi 10
+echo "Enter 3 numbers :"
+read a
+read b
+read c
+if [ $a -gt $b ] and [ $a -gt $c ]
+then
+echo "$a is greater than $b and $c."
+elif [ $b -gt $a ] and [ $b -gt $c ]
+then
+echo "$b is greater than $a and $c."
+else
+echo “$c is greater than $a and $b.”
+fi
+
+
+11] Write a shell script to read marks of 5 subjects and find the total, percentage and grade of student.
+
+Code: vi 11
+echo "Enter 5 subject marks :"
+read m1
+read m2
+read m3
+read m4
+read m5
+tot=`expr $m1+$m2+$m3+$m4+$m5|bc`
+per=`expr $tot/5|bc`
+echo "Total is $tot"
+echo "Percentage is $per"
+if [ $per -lt 35 ]
+then
+echo "Fail."
+elif [ $per -ge 35 -a $per -lt 45 ]
+then
+echo "Third class."
+elif [ $per -ge 45 -a $per -lt 60 ]
+then
+echo "Second class."
+else
+echo "First Class."
+fi
+
+
+12] Write a shell script to check whether the year entered is leap or not.
+
+Code: vi 13
+echo "Enter a year :"
+read year
+if [ `expr $year % 4` -eq 0 ]
+then
+echo "The entered year is leap year."
+else
+echo "The entered year is not a leap year."
+fi
+
+
+13] The basic salary of an employee is entered if the basic salary is less than or equal to 1500, hra=10%, da=90% of basic salary will be given to employee of the basic salary is greater than 1500 then hra=500 and da=90% will be given. Write a shell script to find gross salary.
+
+Code: vi 13
+echo "Enter basic salary:"
+read b
+if [ $b -le 1500 ]
+then
+hra=`echo 0.10\*$b|bc`
+da=`echo 0.90\*$b|bc`
+gs=`echo $b+$hra+$da|bc`
+echo "Gross Salary is $gs"
+else
+hra=500
+da=`echo 0.98\*$b|bc`
+gs=`echo $b+$hra+$da|bc`
+echo "Gross Salary is $gs"
+fi
+
+
+14] Write a shell script tor pint month name corresponding to month number.
+
+Code: vi 14
+echo "Enter the month number."
+read m
+case $m in
+1) echo Jan;;
+2) echo Feb;;
+3) echo Mar;;
+4) echo Apr;;
+5) echo May;;
+6) echo Jun;;
+7) echo Jul;;
+8) echo Aug;;
+9) echo Sep;;
+10) echo Oct;;
+11) echo Nov;;
+12) echo Dec;;
+*)echo "Please enter valid month number."
+esac
+
+
+15] Write a shell script to print weekday name corresponding to week number.
+
+Code: vi 15
+echo "Enter week number:"
+read m
+case $m in
+1) echo Sun;;
+2) echo Mon;;
+3) echo Tue;;
+4) echo Wed;;
+5) echo Thur;;
+6) echo Fri;;
+7) echo Sat;;
+*) echo "Please enter valid week number."
+esac
+
+
+16] Write a shell script to perform one of the following between 2 numbers : +, -, *, /, %, exit.
+
+Code: vi 16
+echo "Enter 1 for addition"
+echo "Enter 2 for subtraction"
+echo "Enter 3 for multiplication"
+echo "Enter 4 for division"
+echo "Enter 5 for modulus"
+read ch
+case $ch in
+1)echo "Enter 2 numbers :"
+read x
+read y
+add=`expr $x + $y`
+echo "Addition :$add";;
+2)echo "Enter 2 numbers :"
+read x
+read y
+sub=`expr $x - $y`
+echo "Subtraction :$sub";;
+3)echo "Enter 2 numbers :"
+read x
+read y
+mul=`expr $x \* $y`
+echo "Multiplication :$mul";;
+4)echo "Enter 2 numbers :"
+read x
+read y
+div=`expr $x / $y`
+echo "Division :$div";;
+5)echo "Enter 2 numbers :"
+read x
+read y
+mod=`expr $x % $y`
+echo "Modulus :$mod";;
+6)exit;;
+*)echo "Please enter valid choice"
+esac
+
+17] Write a shell script to read character from the user and check the type of character i.e. upper, lowercase, digit or a special symbol otherwise display appropriate message as 'You have entered more
+than 1 character'.
+
+Code: vi 17
+echo "Enter a character"
+read ch
+case $ch in
+[A-Z])
+echo "Uppercase";;
+[a-z])
+echo "Lowercase";;
+[0-9])
+echo "Numbers";;
+?)
+echo "Special character";;
+*)
+echo "You have entered more than 1 character"
+esac
+
+
+
+18] Write a shell script to enter color from the user and display user's favorite color.
+
+Code: vi 18
+echo "Enter a color:"
+read color
+case $color in
+[rR][eE][dD])echo "Your choice is RED color.";;
+[bB][lL][uU][eE])echo "Your choice is BLUE color.";;
+[pP][iI][nN][kK])echo "Your choice is PINK color";;
+*)
+echo "Please enter valid color."
+esac
+
+
+19] Write a shell script to read word from the user and check whether it is starting with the lowercase vowel letter or uppercase or ends with a digit or starts with digit or it is 3 letter word.
+
+Code: vi 19
+echo "Enter word :"
+read word
+case $word in
+[aeiou]*)
+echo "Your entered vowel is in lowercase.";;
+[AEIOU]*)
+echo "Your entered vowel is in UPPERCASE.";;
+[0-9]*)
+echo "Your entered word starting with a digit.";;
+*[0-9])
+echo "Your entered word ending with a digit.";;
+???)
+echo "You entered a 3 letter word";;
+esac
+
+
+20] Write a shell script to read a choice between A-E and do the following:
+a] display today's date
+b] display the calendar of the current year.
+c] display list of all users currently logged in
+d] perform some calculation
+e] exit
+
+Code: vi 20
+echo "Enter your choice"
+echo "a) Enter A to display today's date."
+echo "b) Enter B to display the calendar of current year. "
+echo "c) Enter C to list all users currently logged in."
+echo "d) Enter D to perform some calculations."
+echo "e) Enter E to exit."
+read ch
+case $ch in
+a)echo "Today's date"
+date;;
+b)echo "Current year calendar"
+cal;;
+c)echo "All users currently logged in"
+who;;
+d)echo "Calculation of"
+bc;;
+e)exit;;
+esac
+
+
+21] Write a shell script to read file name from user and find the type of the file whether it is .c or .out type file.
+
+Code: vi 21
+echo "Enter a file name:"
+read f
+case $f in
+*.c)
+echo "This is c type file.";;
+*.out)
+echo "This is out type file.";;
+*)
+echo "This is some other type.";;
+esac
+
+
+
+22] Write a shell script to read 2 strings and check whether the strings are identical. Print appropriate
+message.
+
+Code: vi 35
+echo "Enter line 1: "
+read m
+echo "Enter line 2: "
+read n
+if [ m == n ]
+then
+echo "identical"
+else
+echo "different"
+fi
+
+23] Write a shell script to read a string from command line argument and check whether its length is greater than or equal to 12. Print appropriate message.
+
+Code: vi 36
+str=$1
+len=${#str}
+if [ $len -ge 12 ]
+then
+echo "$1 string length is greater than 12."
+else
+echo "$1 string length is less than 12."
+fi
+
+
+24] Write a shell script to read a file name from the user and check whether it exists or not. If exists then check it is non-empty or not, if non-empty display the contents of the file and print appropriate message.
+
+Code: vi 37
+echo "Enter file name :"
+read f
+if [ -f$f ]
+then
+echo "$f file exists."
+x=`ls $f|wc -l`
+if [ $x -gt 0 ]
+then
+echo "$f file is not empty."
+echo "The content of $f is"
+cat $f
+else
+echo "$f is empty."
+fi
+else
+echo "$f does nor exists."
+fi
+
+25] Write a shell script to read a filename and check if it exists readable or writable. If yes allow the user to append the content in the file and print appropriate message.
+
+Code: vi 38
+echo "Enter file name :"
+read f
+if [ -f$f ]
+then
+echo "$f file exists."
+echo "The contents of $f :"
+cat $f
+if [ -w $f ]
+then
+echo "$f has write permission."
+echo "Now you can append."
+cat>>$f
+else
+echo "$f doesn't have permission."
+fi
+else
+echo "$f doesn't exists."
+fi
+
+
+26] Write a shell script to read file name from user and check whether the file name exists. If it is then read pattern from the user and check whether that pattern exists or not. If it is display lines containing this pattern otherwise display appropriate message.
+
+Code: vi 39
+echo "Enter file name :"
+read f
+if [ -f$f ]
+then
+echo "$f file exists."
+echo "Enter pattern :"
+read pat
+x=`grep -c $pat $f`
+if [ $x -gt 0 ]
+then
+echo "Pattern found."
+echo "Line containing $pat in $f are :"
+grep "$pat" $f
+else
+echo "Pattern not found."
+fi
+else
+echo "File does not exists."
+fi
+
+
+27] Write a shell script which receives 2 file names as argument and it should check whether 2 files contents are same or not. If they are then 2nd file should be deleted.
+
+Code: vi 40
+file1=$1
+file2=$2
+cmp $file1 $file2
+if [ `echo $?` -eq 0 ]
+then
+echo "$file1 and $file2 are same"
+echo "now deleting file2........."
+rm $file2
+echo "deletion successfully"
+else
+echo "2 files are not at all same"
+fi
+
+				--------------PRACTICAL NO 7-------------------
+
+1] Write a shell script to print n natural numbers using while loop.
+
+Code: vi 22
+echo "Enter a number :"
+read n
+i=1
+echo "The first $n natural numbers :"
+while [ $i -le $n ]
+do
+echo $i
+i=$[ $i + 1 ]
+done
+
+
+2] Write a shell script to read sum of first n natural numbers using 'until' loop
+Code: vi 23
+echo "Enter a number :"
+read n
+i=1
+sum=0
+until [ $i -gt $n ]
+do
+sum=$[ $sum+$i]
+i=$[ $i+1 ]
+done
+echo "The sum of $n natural numbers : $sum"
+
+
+3] Write a shell script to print the sum of first n natural numbers using c type for loop.
+
+Code: vi 24
+echo "Enter a number :"
+read n
+i=1
+sumsq=0
+for ((i=1;i<=n;i++))
+do
+sumsq=$[ $sumsq + $i * $i ]
+done
+echo "The sum of square $n natural numbers : $sumsq"
+
+
+4] Write a shell script to read positive number from the user and print multiplication of that number.
+
+Code: vi 25
+while [ true ]
+do
+echo "Enter a number :"
+read num
+if [ $num -le 0 ]
+then
+echo "Please enter positive number :"
+else
+i=1
+while [ $i -le 10 ]
+do
+mul=$[ $i * $num ]
+echo "$num * $i=$mul"
+i=$[ $i +1 ]
+done
+break
+fi
+done
+
+5] Write a shell script to print even or odd series up to n using while loop.
+
+Code: vi 26
+echo "Enter a number"
+read n
+x=1
+echo "The even numbers upto $n are : "
+while [ $x -le $n ]
+do
+if(( $x%2==0 ))
+then
+echo $x
+fi
+x=$[$x+1]
+done
+x=1
+echo "The odd numbers upto $n are : "
+while [ $x -le $n ]
+do
+if(( $x%2!=0 ))
+then
+echo $x
+fi
+x=$[$x+1]
+
+
+
+6] Write a shell script to generate Fibonacci series upto n.
+
+Code: vi 27
+echo "Enter any value :"
+read n
+i=1
+f1=0
+f2=1
+echo "$f1"
+echo "$f2"
+while [ $i -le $n ]
+do
+f3=`expr $f1 + $f2`
+echo "$f3"
+i=$[ $i + 1 ]
+f1=$f2
+f2=$f3
+done
+
+
+7] Write a shell script to generate following series using while loop, series is 1, 3 ,2, 4, 3......100
+
+Code: vi 28
+i=1
+j=3
+while [ $i -le 100 ]
+do
+echo $i
+echo $j
+i=$[ $i + 1 ]
+j=$[ $j + 1 ]
+done
+
+
+8] Write a shell script to read positive number from the command line argument and find its factorial.
+
+Code: vi 29
+echo "Enter a number :"
+read num
+if [ $num -lt 0 ]
+then
+echo "Please enter positive number."
+else
+fact=1
+for ((i=1;i<=num;i++))
+do
+fact=$[ $fact * $i ]
+done 
+echo "Factorial of $num is : $fact"
+fi
+
+
+9] Write a shell script that asks the user to input the number and display the table of factorial from 1 to n.
+
+Code: vi 30
+echo "Enter any number :"
+read num
+fact=1
+if [ $num -lt 0 ]
+then
+echo "Please enter positive number."
+else
+for(( i=1;i<=num;i++ ))
+do
+for(( j=1;j<=$i;j++ ))
+do
+fact=$[ $fact * $j ]
+done
+echo "$i!= $fact"
+fact=1
+done
+fi
+
+
+10] Write a shell script to read a number from the user and check whether it is prime number or not.
+
+Code: vi 31
+i=2
+flag=0
+while [ $i -lt $1 ]
+do
+if [ `expr $1 % $i` -eq 0 ]
+then
+flag=1
+fi
+i=$[ $i + 1 ]
+done
+if [ $flag -eq 0 ]
+then
+echo "$1 is a prime number."
+else
+echo "$1 is not a prime number."
+fi
+
+11] Write a shell script to read a number from the user and print prime number series up to that number.
+
+Code: vi 32
+flag=0
+echo "Enter number: "
+read no
+echo "Series of prime numbers upto $no: "
+for((i=2;i<=no;i++))
+do
+for((j=2;j<i;j++))
+do
+if [ `expr $i % $j ` -eq 0 ]
+then
+flag=1
+fi
+done
+if [ $flag -eq 0 ]
+then
+echo $i
+fi
+flag=0
+done
+
+
+12] Write a shell script to find power of n^y where n and y should be taken from command line.
+
+Code: vi 33
+pow=1
+echo "Enter number(m): "
+read m
+echo "Enter power(n): "
+read n
+for((i=1;i<=n;i++))
+do
+pow=`expr $pow \* $m `
+done
+echo "$m^$n = $pow"
+
+13] Write a shell script to find G.C.D. and L.C.M. of 2 positive numbers.
+
+Code: vi 34
+echo "Enter first number :"
+read n
+echo "Enter second number :"
+read m
+for (( i=1;i<=n;i++ ))
+do
+if [ `expr $n % $i` -eq 0 ]
+then
+if [ `expr $m % $i` -eq 0 ]
+then
+gcd=$i
+fi
+fi
+done
+echo "G.C.D. :$gcd"
+lcm=`expr $n \* $m`
+lcm1=`expr $lcm / $gcd`
+echo "L.C.M. is $lcm1"
+
+14] Write a shell script to display list of all files and directories in current working directory separately.
+
+Code: vi 41
+f=0
+s=0
+d=0
+for i in *
+do
+if [-f $i]
+then
+f=$[$f+1]
+elif [-d $i]
+then
+d=$[$d+1]
+else
+s=$[$s+1]
+fi
+done
+echo "The number of directory $d"
+echo "The number of files :$f"
+echo "The number of special files :$s"
+
+
+15] Write a shell script which checks every minute how many users currently logged in.
+
+Code: vi 42
+while [ true ]
+do
+x=`who|wc -l`
+echo "Number of users currently logged in :$x"
+sleep 60
+done
+
+
+16] Write a shell script to create a file which stores name of file. Against each name put morning, evening or afternoon depending upon time at which file is created.
+
+Code: vi 44
+for i in *
+do
+if [ -f $i ]
+then
+x=`ls -l $i | cut -c 45-47`
+echo "$x"
+if [ $x -ge 6 -a $x -lt 12 ]
+then
+echo "$i: morning" >>b1
+elif [ $x -ge 12 -a $x -lt 16 ]
+then
+echo "$i: afternoon" >>b1
+elif [ $x -ge 16 -a $x -lt 20 ]
+then
+echo "$i: evening" >>b1
+else
+echo "$i: goodnight" >>b1
+fi
+cat b1
+else
+echo "File does not exist"
+fi
+done
+
+
+17] Write a shell script to accept a username. If user is not present then appropriate
+message should be displayed otherwise tell the user to logout, wait for 5 seconds and kill his job.
+
+Code: vi 45
+echo "Enter username:"
+read u
+x=`who|grep -c "$u"`
+if [ $x -eq 0 ]
+then
+echo "$u user not present."
+else
+echo "$u user present....please save your work....system will shut down in some
+time"
+sleep 5
+shut down -h 0
+fi
+
+18] Write a shell script to accept file name from user, store the names in new file if length of name is less than 10.
+
+Code: vi 46
+count=1
+while [ $count -le 5 ]
+do
+echo "Enter name $count"
+read name
+len=${#name}
+if [ $len -lt 10 ]
+then
+echo "$name">>demo
+fi
+count=$[ $count+1 ]
+done
+echo "The name whose length is less than 10 are :"
+cat demo
+
+
+19] Write a shell script to pick up a shell script file and convert first 10 lines from lower to uppercase.
+
+Code: vi 48
+echo "Enter file name :"
+read f
+for f in *.c
+do
+if [ -f$f ]
+then
+echo "The original content of $f file :"
+cat $f
+echo "The translated first 2 lines of $f file :"
+head -2 $f|tr '[a-z]' '[A-Z]'
+else
+echo "$f is not a file"
+fi
+done
+Output:
+[tybscit@localhost Desktop]$ sh 48
+Enter file name :
+471.c
+The original content of 471.c file :
+echo "Enter c program file"
+read f1
+if [ -f$f1 ]
+then
+echo "$f1 exist"
+echo "Compiling and executing $f1 file"
+cc -o a1.out $f1
+echo "The output of $f1 file is "
+./a1.out
+else
+echo "$f1 file does not exist."
+fi
+The translated first 2 lines of 471.c file :
+ECHO "ENTER C PROGRAM FILE"
+READ F1
+The original content of 47.c file :
+#include<stdio.h>
+main()
+{
+printf("Hello World !!\n");
+}
+The translated first 2 lines of 47.c file :
+#INCLUDE<STDIO.H>
+MAIN()
+
+20] Write a shell script to accept 5 student marks, name and roll number. Store these details in pass or fail file depending on their marks.
+
+Code: vi 49
+count=1
+while [ $count -lt 5 ]
+do
+echo "Enter roll number,name and marks $count:"
+read rlno
+read nm
+read mks
+if [ $mks -lt 35 ]
+then
+echo "$rlno~$nm~$mks">>fail
+else
+echo "$rlno~$nm~$mks">>pass
+fi
+count=$[ $count+1 ]
+done
+echo "Students who have passed:"
+cat pass
+echo "Students who have failed :"
+cat fail;
+
+
+21] Write a shell script to accept 2 file names from user. Translate all characters of a first file from lower to uppercase and store it in second file.
+
+Code: vi 50
+echo "Enter file 1 name"
+read f1
+if [ -f$f1 ]
+then
+echo "The $f1 exists."
+echo "The contents of $f1 are :"
+cat $f1
+while [ true ]
+do
+echo "Enter file 2 name"
+read f2
+if [ -f$f2 ]
+then
+echo "$f2 exist......Please enter other name"
+echo "The translated content of $f1"
+tr '[a-z]' '[A-Z]' <$f1 >$f2
+cat $f2
+break
+fi
+done
+break
+else
+
+
+				--------------PRACTICAL NO 8 --------------------
+
+PRACTICAL NO- 8 Shell Scripting – III
+
+1] Write a shell script to accept c or C++ file from the user, compile it, execute this file and display the output.
+Code:
+vi 47.c
+--------
+#include<stdio.h>
+main()
+{
+printf("Hello World !!\n");
+}
+vi 471.c
+------------
+echo "Enter c program file"
+read f1
+if [ -f$f1 ]
+then
+echo "$f1 exist"
+echo "Compiling and executing $f1 file"
+cc -o a1.out $f1
+echo "The output of $f1 file is "
+./a1.out
+else
+echo "$f1 file does not exist."
+fi
+
+
+2] Create a file named test2 with fields rollNo, stud Name and marks. Fields are separated by colon. Write a shell script to perform the following options on that file
+
+i)	Display content of file
+ii)	Copy the given file
+iii)	Delete the given file
+iv)	Exit
+
+Code:	vi test2
+while [ true ]
+do
+echo "1.Display the contents of the	file:"
+echo "2.Copy the file "
+echo "3.Delete the file "
+echo "4.Exit"
+echo "Enter your choice:"
+
+read ch
+case $ch in
+1)echo "Display the content of the file"
+cat test1;;
+2)while [ true ]
+do
+echo "Enter the file name for copying "
+read f1
+if [ -f$f1 ]
+then
+echo "$f1 file already exist can't copy"
+
+else
+echo "$f1 doesn't exist. You can copy the contents"
+cp stud $f1
+echo "Target file"
+cat $f1
+break
+fi
+done;;
+
+3)echo "Now we are deleting the file "
+rm $f1
+echo "File deleted"
+;;
+4)echo “Exit”
+
+exit();;
+echo "Wrong choice";;
+*)break;;
+
+esac
+done
+
+
+
+3] Write a shell script to perform following operation on the file entered by the user.
+i)	Display content of file
+ii)	Copy the given file
+iii)	Rename the given file
+iv)	Delete the given file
+v)	Exit
+vi)	If above 4 are not there then print error message
+
+Code: vi	test3
+while [ true ]
+do
+echo "1.Display contents of file"
+echo "2.Copy the given file"
+echo "3.Rename the given file"
+echo "4.Delete the file "
+
+echo "5.Exit"
+echo "Enter the file name"
+read test2
+if [ -f$test2 ]
+then
+echo "Enter your choice"
+read ch
+case $ch in
+
+1)echo "Contents of file $test2 are:"
+cat $test2;;
+
+2)echo "Enter the target file"
+read $f2
+
+if [ -f$f2 ]
+then
+echo "$f2 already exists,can,t copy"
+else
+echo "$f2 doesn't exist"
+cp $test2 $f2
+echo "Target file"
+cat $f2
+fi
+;;
+
+3)echo "Enter new name for file"
+read nm
+
+mv $test2 $nm;;
+
+4)	echo "Deleting the file" rm $f2;;
+5)echo "Exit"
+exit 0;;
+*)break;;
+esac
+else
+echo "File doesn’t exists"
+
+fi
+done
+
+
+
+4] Write a shell script to add unique record in above file student.
+
+Code: vi	test4
+while [ true ]
+do
+echo "enter student rollno"
+read sno
+x=`grep -c "$sno" student`
+if [ $x -gt 0 ]
+then
+echo "$sno rollNo already exists"
+else
+echo "$sno doesn’t exists"
+
+echo "enter student name:"
+read nm
+echo "Enter students marks"
+
+read mrk
+echo "$sno:$nm:$mrk">>student
+echo "Record Added"
+echo "Now the contents of student file are:"
+cat student
+break
+fi
+done
+
+
+
+5] Create 2 files as follows Master Data(ProdNo, ProdNm, RateOfSale, Description) and Transdata(custData, ProdNo, CustNm, Units sold).Fields are separated by colon. Write a shell script to perform the following operations on these files.
+
+1)	Product Query
+2)	Customer Query
+3)	Exit
+
+Code:
+ProductQuery()
+{
+echo "enter product no "
+read pno
+echo "details of $pno product are "
+grep "$pno" MasterData
+
+echo "do you want to see another product (y/n) ? "
+read ans
+if [ $ans = "y" ]
+then
+ProductQuery
+else
+sh Q5
+fi
+break
+}
+
+CustomerQuery()
+{
+
+echo "enter customer code "
+read cno
+echo "details of $cno customer are "
+grep "$cno" TransData
+echo "do you want to see another customer(y/n) ?"
+read ans
+if [ $ans = "y" ]
+then
+CustomerQuery
+else
+sh Q5
+fi
+break
+
+}
+echo "Select your choice "
+echo "1. Product Query"
+echo "2. Customer Query"
+echo "3. Exit"
+while [ true ]
+do
+echo "Enter your Choice"
+read ch
+case $ch in
+1)ProductQuery;;
+2)CustomerQuery;;
+3)exit;;
+*)echo "Wrong Choice";;
+esac
+
+done
+					----------------PRACTICAL NO 9 -------------------
+
+
+1.Get the IPaddress of your machine.
+Command:
+$ ifconfig
+
+2.Get the hostname of your machine. 
+Command:
+$ hostname
+
+3.Print the information of users currently logged in.
+Command:
+$ whoami
+
+4.Display the user name of the current user.
+Command:
+$ whoami
+
+5.Use ping command to check the network connectivity. 
+Command:
+$ pingwww.google.com
+
+6.Display the use of trace route command 
+Command:
+$traceroutewww.google.com
+
+7. Display the use route command.
+Command:
+$route
+
+				----------------PRACTICAL NO 10 --------------------
+
+1.Demonstrate sh command.
+Command:
+$ sh ‘anyshellscript name’
+
+2.Display user’s processes. 
+Command:
+$ ps
+i)Give full listing of process 
+Command: $ps -f
+ii)Display all processes including user and system.
+Command: $ps -A
+iii)Display process of all users.
+Command: $ps -a
+iv)Display process long listing including memory related information.
+Command: $ps -l
+
+3.Command to execute process with low priority.
+Command:
+$ nice wc -l name &
+
+4.Command for premature termination of a process.
+Command:
+$ kill ‘PID’
+
+5.Command to assign time when to execute a process. 
+Command:
+$ at 14:08 
+at> 13.sh
+[ctrl-d]
+
+6.Command to schedule processes for later execution. 
+Command:
+$batch < emp.sh
